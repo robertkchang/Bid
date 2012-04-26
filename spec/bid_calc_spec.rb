@@ -2,14 +2,6 @@ require "spec_helper"
 require '../lib/bid'
 
 describe "Test" do
-  it "should process bid with the values given" do
-    bid_pos_param = 1
-    bid_price_param = 10
-    calc = BidCalc.new
-    calc.should_receive(:processBid).with(bid_pos_param, bid_price_param).and_return(10)
-    calc.processBid(bid_pos_param, bid_price_param)
-  end
-
   it "should calculate with the values given" do
     num_servers_param = 5
     bids_param = [20,15,10,9,1]
@@ -18,25 +10,11 @@ describe "Test" do
     calc.calculate(num_servers_param, bids_param)
   end
 
-  it "should return a value from process bid" do
-    price_param = 10
-    calc = BidCalc.new
-    calc.stub(:processBid => price_param)
-    calc.processBid(1,10).should eql price_param
-  end
-
   it "should return a value from calculate" do
     result_map = {:revenue => 40, :revenue_bid => 10, :revenue_pos => 4}
     calc = BidCalc.new
     calc.stub(:calculate => result_map)
     calc.calculate(4,20,10,15,5).should eql result_map
-  end
-
-  it "should process bid correctly" do
-    bid_pos_param = 4
-    bid_price_param = 10
-    calc = BidCalc.new
-    calc.processBid(bid_pos_param, bid_price_param).should eql 40
   end
 
   it "should calculate revenue correctly" do

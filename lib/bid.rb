@@ -30,21 +30,6 @@
 #
 class BidCalc
 
-  # Given bid position in list and the bid value, calculate revenue
-  #
-  # params:
-  #   bid_position: integer
-  #   this_bid: integer
-  #
-  # returns:
-  #   integer
-  #
-  def processBid (bid_position, this_bid)
-
-    return bid_position * this_bid
-
-  end
-
   # Given number of servers and a list of bids in descending order,
   # return a map containing maximum revenue, the bid that generates the max revenue, and the position of that bid in the list
   #
@@ -70,33 +55,26 @@ class BidCalc
       # Note - it is valid not to have any bids
 
       # initialize return values
-      max_revenue_thus_far = 0
-      max_revenue_bid = 0
-      max_revenue_bid_pos = 0
+      result_map = {:revenue => 0, :revenue_bid => 0, :revenue_pos => 0}
 
       # iterate through only as many bids as there are servers
-      (0..(num_of_servers <= bids.length ? num_of_servers : bids.length)-1).each do |index|
-
-        # use this index
-        use_this_index = index + 1
+      (1..(num_of_servers <= bids.length ? num_of_servers : bids.length)).each do |index|
 
         # get the bid price
-        this_bid = bids[index]
+        this_bid = bids[index-1]
 
         # calculate revenue given bid and position
-        price = processBid(use_this_index, this_bid)
+        price = index * this_bid
 
         # if revenue is greater than revenue generated from thus far from previous bids
         # then set the return values to current revenue, bid, and position
-        if (price > max_revenue_thus_far)
-          max_revenue_thus_far = price
-          max_revenue_bid = this_bid
-          max_revenue_bid_pos = use_this_index
+        if (price > result_map[:revenue])
+          result_map = {:revenue => price, :revenue_bid => this_bid, :revenue_pos => index}
         end
       end
 
       # return the map
-      return {:revenue => max_revenue_thus_far, :revenue_bid => max_revenue_bid, :revenue_pos => max_revenue_bid_pos}
+      return result_map
 
     # if error, display message and return the message in the map
     rescue Exception => e
