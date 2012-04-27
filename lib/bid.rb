@@ -102,7 +102,9 @@ class BidCalc
     bid_list =  ARGV[1,(ARGV.length-1)].collect{|i| i.to_i}
 
     # calculate
-    puts (calc.calculate(servers, *bid_list))
+    result_map = calc.calculate(servers, *bid_list)
+
+    puts ('Max revenue $' + result_map[:revenue].to_s + ' @ bid = $' + result_map[:revenue_bid].to_s + ', with ' + result_map[:revenue_pos].to_s + ' server(s) allocated.')
   end
 
 end
