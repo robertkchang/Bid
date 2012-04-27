@@ -78,7 +78,6 @@ class BidCalc
 
     # if error, display message and return the message in the map
     rescue Exception => e
-      puts e.message
       return {:error_message => e.message}
     end
 
