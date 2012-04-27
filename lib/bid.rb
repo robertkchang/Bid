@@ -104,7 +104,7 @@ class BidCalc
     # calculate
     result_map = calc.calculate(servers, *bid_list)
 
-    puts ('Max revenue $' + result_map[:revenue].to_s + ' @ bid = $' + result_map[:revenue_bid].to_s + ', with ' + result_map[:revenue_pos].to_s + ' server(s) allocated.')
+    puts ('Max revenue $' + result_map[:revenue].to_s + ' @ bid = $' + result_map[:revenue_bid].to_s + ', with ' + result_map[:revenue_pos].to_s + ' server(s) auctioned.')
   end
 
 end
