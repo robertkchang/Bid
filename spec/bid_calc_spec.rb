@@ -49,7 +49,7 @@ describe "Test" do
     result_map[:revenue_pos].should eql 2
   end
 
-  it "should return an error message if num_of_servers parameter is less than 0" do
+  it "should return an error message if num_of_servers parameter is less than 1" do
     calc = BidCalc.new
     result_map = calc.calculate(0,20,15,10,9)
     result_map[:revenue].should eql nil
