@@ -84,4 +84,26 @@ class BidCalc
 
   end
 
+  ########
+  # Main #
+  ########
+
+  # instantiate calculator
+  calc = BidCalc.new
+
+  if (ARGV.length == 0)
+    puts ("USAGE: ruby bid.rb <num of servers> <bid>+")
+    puts ("EXAMPLE: ruby bid.rb 5 20 15 10 9 1 (5 servers, bids: 20,15,10,9,1")
+  else
+
+    # first parameter is num_of_servers
+    servers = ARGV[0].to_i()
+
+    # rest of parameters are bids - convert to integer before calculating
+    bid_list =  ARGV[1,(ARGV.length-1)].collect{|i| i.to_i}
+
+    # calculate
+    puts (calc.calculate(servers, *bid_list))
+  end
+
 end
